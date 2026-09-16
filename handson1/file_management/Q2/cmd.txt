@@ -1,0 +1,20 @@
+  208  /proc/
+  209  cd /proc/
+  210  ls
+  211  cd 5635
+  212  ls
+  213  clear
+  214  ls -al
+  215  cat status
+  216  cat cmdline
+  217  clear
+  218  cat stat
+  219  ps -l
+  220  ps -l -p5635
+  221  ls -al
+  222  ls -l fd/
+  223  cat maps
+  224  history tail 10
+  225  history 10
+  226  history 20
+  227  history 20 > ~/Desktop/SSProject/handson1/Q2/cmd.txt
