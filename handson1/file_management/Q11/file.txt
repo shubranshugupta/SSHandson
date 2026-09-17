@@ -1,0 +1,4 @@
+1. Written using the ORIGINAL fd.
+2. Written using the DUP() fd.
+3. Written using the DUP2() fd.
+4. Written using the FCNTL() fd.
