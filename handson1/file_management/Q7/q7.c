@@ -3,13 +3,13 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define BUFFER_SIZE 4096 // 4KB buffer is highly efficient for most filesystems
+#define BUFFER_SIZE 4096
 
 int main(int argc, char *argv[]) {
     // 1. Ensure the user provided exactly two file names
     if (argc != 3) {
-        // argv[0] is the name of the program itself (e.g., ./my_cp)
-        write(2, "Usage: ./my_cp <source_file> <destination_file>\n", 48);
+        // argv[0] is the name of the program itself (e.g., ./a.out)
+        write(2, "Usage: ./a.out <source_file> <destination_file>\n", 48);
         return 1;
     }
 
