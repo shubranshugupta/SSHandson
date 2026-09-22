@@ -6,7 +6,7 @@
 int main(int argc, char *argv[]) {
     // 1. Ensure the user provided a filename
     if (argc != 2) {
-        write(2, "Usage: ./file_info <filename>\n", 30);
+        write(2, "Usage: ./a.out <filename>\n", 30);
         return 1;
     }
 
