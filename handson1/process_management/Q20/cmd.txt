@@ -1,0 +1,8 @@
+nice -n 10 ./a.out
+sudo nice -n -5 ./a.out
+
+# Change the nice value of an existing PID to 15 (lower priority)
+renice -n 15 -p <PID>
+
+# Give higher priority (requires root)
+sudo renice -n -10 -p <PID>
