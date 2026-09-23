@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
 
@@ -16,9 +18,35 @@ static inline unsigned long long read_tsc() {
     return ((unsigned long long)hi << 32) | lo;
 }
 
+double get_cpu_freq_mhz() {
+    FILE *fp = fopen("/proc/cpuinfo", "r");
+    if (!fp) return 0.0;
+
+    char line[256];
+    double mhz = 0.0;
+
+    while (fgets(line, sizeof(line), fp)) {
+        if (strncmp(line, "cpu MHz", 7) == 0) {
+            char *colon = strchr(line, ':');
+            if (colon) {
+                mhz = atof(colon + 1);
+                break;
+            }
+        }
+    }
+    fclose(fp);
+    return mhz;
+}
+
 int main() {
     unsigned long long start_cycles, end_cycles, total_cycles;
     pid_t pid;
+
+    double cpu_mhz = get_cpu_freq_mhz();
+    if (cpu_mhz <= 0.0) {
+        fprintf(stderr, "Could not determine CPU frequency\n");
+        return 1;
+    }
 
     // 1. "Warm-up" the cache
     // We call getpid() once before starting the timer. 
@@ -38,9 +66,11 @@ int main() {
 
     // 5. Calculate the difference
     total_cycles = end_cycles - start_cycles;
+    double time_ns = ((double)total_cycles * 1000.0) / cpu_mhz;
 
     printf("Process ID (PID): %d\n", pid);
     printf("Time taken for getpid(): %llu CPU cycles\n", total_cycles);
+    printf("Time taken for getpid(): %.2f ns\n", time_ns);
 
     return 0;
 }
