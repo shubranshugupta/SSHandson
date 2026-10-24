@@ -1,0 +1,4 @@
+mknod fifo_mknod p
+mkfifo fifo_mkfifo
+mknod_trace.txt:mknodat(AT_FDCWD, "fifo_trace1", S_IFIFO|0666) = 0
+mkfifo_trace.txt:mknodat(AT_FDCWD, "fifo_trace2", S_IFIFO|0664) = 0
